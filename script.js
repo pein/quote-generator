@@ -43,6 +43,7 @@ async function getQuote() {
 
     quoteText.innerText = data.quoteText;
   } catch (error) {
+    //@TODO: prevent an infint loop with a counter
     getQuote();
   }
 
