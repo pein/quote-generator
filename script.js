@@ -1,6 +1,6 @@
 const quote = document.getElementById("quote");
 const quoteText = document.getElementById("quote__content");
-const author = document.getElementById("author");
+const authorName = document.getElementById("author");
 const twitterBtn = document.getElementById("twitter");
 const newQuoteBtn = document.getElementById("new-quote");
 
@@ -15,10 +15,10 @@ async function getQuote() {
     const data = await res.json();
 
     // if Author is blank, add 'unknown'
-    if (data.aauthor === "") {
+    if (data.author === "") {
       author.innerText = "Unknown";
     } else {
-      author.innerText = data.quoteAuthor;
+      authorName.innerText = data.quoteAuthor;
     }
     //Reduce font size for long quotes
     if (data.quoteText.length > 120) {
@@ -32,6 +32,19 @@ async function getQuote() {
     // getQuote();
   }
 }
+
+// Tweet Quote
+function tweetQuote() {
+  const quote = quoteText.innerText;
+  const author = authorName.innerText;
+  const twitterUrl = `https://twitter.com/intent/tweet?text=${quote} - ${author}`;
+  window.open(twitterUrl, "_blank");
+}
+
+// Event Listners
+
+newQuoteBtn.addEventListener("click", getQuote);
+twitterBtn.addEventListener("click", tweetQuote);
 
 //OnLoad
 
